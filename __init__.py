@@ -34,4 +34,3 @@ app.register_blueprint(cat_blueprint)
 
 from .items import items as items_blueprint
 app.register_blueprint(items_blueprint)
-
