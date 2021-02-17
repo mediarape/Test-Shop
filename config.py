@@ -11,3 +11,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
     PICPATH = environ.get('PICPATH')
     ROOT_PATH = basedir
+    DBCFG = {
+        'dbHost': "127.0.0.1",
+        'dbUser': "root",
+        'dbPassword': "",
+        'dbName': "shop",
+        'charSet': "utf8mb4"
+    }
