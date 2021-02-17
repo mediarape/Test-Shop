@@ -1,17 +1,25 @@
 import pymysql as pm
-from .config import Config
 
 # MySQL database config:
-dbCfg = Config.DBCFG
+dbCfg = {
+        'dbHost': "127.0.0.1",
+        'dbUser': "root",
+        'dbPassword': "",
+        'dbName': "shop",
+        'charSet': "utf8mb4",
+        'cursor': pm.cursors.DictCursor
+    }
 
 # Creating database file:
 db = pm.connect(host=dbCfg['dbHost'], user=dbCfg['dbUser'], password=dbCfg['dbPassword'], charset=dbCfg['charSet'],
-                cursorclass=pm.cursors.DictCursor)
+                cursorclass=dbCfg['cursor'])
 
 try:
+    print('Creating database...')
     cursor = db.cursor()
     sqlStatement = "CREATE DATABASE IF NOT EXISTS " + dbCfg['dbName']
     cursor.execute(sqlStatement)
+    print('Database created')
 
 except Exception as e:
     print("Exception occurred:{}".format(e))
@@ -24,6 +32,7 @@ db = pm.connect(host=dbCfg['dbHost'], user=dbCfg['dbUser'], password=dbCfg['dbPa
                 cursorclass=pm.cursors.DictCursor, database=dbCfg['dbName'])
 
 try:
+    print('Creating tables...')
     cursor = db.cursor()
     sqlQuery = ["CREATE TABLE IF NOT EXISTS items (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (id), title VARCHAR("
                 "100) NOT NULL, description VARCHAR(500), price FLOAT(10, 2) NOT NULL, quantity INT NOT NULL, "
@@ -39,6 +48,7 @@ try:
                 ]
     for sql in sqlQuery:
         cursor.execute(sql)
+    print('Tables created')
 
 except Exception as e:
     print("Exception occurred:{}".format(e))
@@ -58,6 +68,7 @@ try:
         val = file.readline()
         sql = '''INSERT INTO items (title, description, price, quantity, category) VALUES {}'''.format(val)
         cursor.execute(sql)
+        print('Tables filled')
         file.close()
 
     db.commit()

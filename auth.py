@@ -21,6 +21,8 @@ def encode_auth_token():
             algorithm='HS256'
         )
     except Exception as e:
+        with open('exc.txt', 'w') as file:
+            file.write(str(e))
         return "Fail"
 
 @auth.route('/login')
@@ -66,7 +68,11 @@ def login_post():
         return redirect(url_for('auth.login'))
 
     login_user(user, remember=remember)
-    token = encode_auth_token().decode('UTF-8')
+    token = encode_auth_token()
+    try:
+        token = token.decode('UTF-8')
+    except:
+        pass
     session['token'] = token
 
     return redirect(url_for('main.profile'))
