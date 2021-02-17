@@ -1,5 +1,5 @@
 import pymysql as pm
-from .config import Config
+from project.config import Config
 
 # MySQL database config:
 dbCfg = Config.DBCFG
