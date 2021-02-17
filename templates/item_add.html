@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Add New Item</h3>
+<div class="box">
+    <form method="POST" action="{{ url_for('catalog.item_add') }}" enctype="multipart/form-data">
+        <div class="field">
+            <div class="control">
+                <label for="title">Item name</label>
+                <input class="input is-large" name="title" id="title" placeholder="Enter new item name" autofocus="">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="description">Item description</label>
+                <input class="input is-large" name="description" id="description" placeholder="Enter new item description">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="price">Item price</label>
+                <input class="input is-large" name="price" id="price" placeholder="Enter new item price">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="quantity">Item quantity</label>
+                <input class="input is-large" name="quantity" id="quantity" placeholder="Enter new item quantity">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="category">Select item category</label>
+                <select id="category" class="select is-large" name="category">
+                    {% for i in cats: %}
+                    <option value="{{ i[0] }}">{{ i[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <label for="new_img" class="col-sm-2">Upload an image:</label>
+
+                <input type="file" accept="image/*" class="file" id="new_img" name="new_img">
+            </div>
+        </div>
+        <button class="button is-block is-info is-large is-fullwidth">Add</button>
+    </form>
+</div>
+{% endblock %}

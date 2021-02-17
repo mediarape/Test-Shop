@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  List of Categories
+</h1>
+<a href="{{ url_for('catalog.cat_add') }}"><button class="is-block is-info is-large is-fullwidth">Add Category</button></a>
+    {% for i in line %}
+        <div>
+            <a href="{{ url_for('catalog.items', id=i.id) }}">{{ i.title }} | {{ i.description | truncate(100) }} | Items: {{ i.item_count }}</a>
+            <a href="{{ url_for('catalog.cat_edit', id=i.id) }}">(Edit)</a>
+            <a href="{{ url_for('catalog.cat_del', id=i.id) }}">(Delete)</a>
+        </div>
+    {% endfor %}
+{% endblock %}

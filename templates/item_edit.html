@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Edit {{ item.title }}</h3>
+{% if item.img_name != '' %}
+<img src="{{ path + item.img_name }}" style="max-width: 300px" alt="{{ item.title }}">
+{% endif %}
+<div class="box">
+    <form method="POST" action="{{ url_for('catalog.item_edit', id=item.id) }}" enctype="multipart/form-data">
+        <div class="field">
+            <div class="control">
+                <label for="title">Item title</label>
+                <input class="input is-large" value="{{ item.title }}" id="title" name="title" placeholder="Enter new item name"
+                       autofocus="">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="description">Item description</label>
+                <input class="input is-large" value="{{ item.description }}" id="description" name="description"
+                       placeholder="Enter new item description">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="price">Item price</label>
+                <input class="input is-large" value="{{ item.price }}" id="price" name="price" placeholder="Enter new item price">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="quantity">Item quantity</label>
+                <input class="input is-large" value="{{ item.quantity }}" id="quantity" name="quantity"
+                       placeholder="Enter new item quantity">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="category">Select item category</label> <select id="category" class="select is-large"
+                                                                           name="category">
+                {% for i in cats: %}
+                <option
+                        {% if i[0] == item.category %}
+                        selected
+                        {% endif %}
+                        value="{{ i[0] }}">{{ i[1] }}
+                </option>
+                {% endfor %}
+            </select>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="new_img" class="col-sm-2">Upload an image:</label>
+
+                <input type="file" accept="image/*" class="file" id="new_img" name="new_img">
+            </div>
+        </div>
+
+        <button class="button is-block is-info is-large is-fullwidth">Edit</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">{{ item.title }}</h1>
+{% if item.img_name != '' %}
+<img src="{{ path + item.img_name }}" style="max-width: 300px" alt="{{ item.title }}">
+{% endif %}
+
+<h2>{{ item.description }}</h2>
+<h3>Price: {{ '%0.2f'|format(item.price|float) }} | Quantity: {{ item.quantity }}</h3>
+<a href="{{ url_for('catalog.item_edit', id=item.id) }}">(Edit)</a> | <a href="{{ url_for('catalog.item_del', id=item.id) }}">(Delete)</a>
+<hr>
+<h2><b>Change Log:</b></h2>
+    {% if change != null %}
+        {% for i in change %}
+            {{ i.change_time }} | Previous QTY: {{ i.qty_old }} | Current QTY: {{ i.qty_new }}<br>
+        {% endfor %}
+    {% else %}
+        No changes
+    {% endif %}
+<hr>
+{% for i in files %}
+    {{ i }} <br>
+{% endfor %}
+
+{% endblock %}

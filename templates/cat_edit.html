@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Edit Category
+</h1>
+<h3 class="title">{{ line[0] }}</h3>
+    <div class="box">
+        <form method="POST" action="{{ url_for('catalog.cat_edit', id=id) }}" name="form_1">
+            <div class="field">
+                <div class="control">
+                    <label for="title">Category name</label>
+                    <input class="input is-large" value="{{ line[0] }}" name="title" placeholder="Enter new category name" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label for="description">Category description</label>
+                    <input class="input is-large" value="{{ line[1] }}" name="description" placeholder="Enter new category description">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Edit</button>
+        </form>
+    </div>
+{% endblock %}

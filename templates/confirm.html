@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Are you sure you want to delete {{ title }}?</h3>
+    <a href="{{ confirm }}"><button class="button is-block is-info is-large is-fullwidth">Definitely Yes</button></a>
+    <a href="{{ cancel }}"><button class="button is-block is-info is-large is-fullwidth">No Way</button></a>
+{% endblock %}
