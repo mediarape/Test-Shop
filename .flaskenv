@@ -1,2 +1,1 @@
 FLASK_APP=project
-FLASK_DEBUG=1
