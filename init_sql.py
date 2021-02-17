@@ -1,18 +1,12 @@
 import pymysql as pm
+from .config import Config
 
 # MySQL database config:
-dbCfg = {
-    'dbHost': "127.0.0.1",
-    'dbUser': "root",
-    'dbPassword': "",
-    'dbName': "shop",
-    'charSet': "utf8mb4",
-    'cursorType': pm.cursors.DictCursor
-}
+dbCfg = Config.DBCFG
 
 # Creating database file:
 db = pm.connect(host=dbCfg['dbHost'], user=dbCfg['dbUser'], password=dbCfg['dbPassword'], charset=dbCfg['charSet'],
-                cursorclass=dbCfg['cursorType'])
+                cursorclass=pm.cursors.DictCursor)
 
 try:
     cursor = db.cursor()
@@ -27,7 +21,7 @@ finally:
 
 # Creating database tables:
 db = pm.connect(host=dbCfg['dbHost'], user=dbCfg['dbUser'], password=dbCfg['dbPassword'], charset=dbCfg['charSet'],
-                cursorclass=dbCfg['cursorType'], database=dbCfg['dbName'])
+                cursorclass=pm.cursors.DictCursor, database=dbCfg['dbName'])
 
 try:
     cursor = db.cursor()
