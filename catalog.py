@@ -158,7 +158,10 @@ def info():
     item = Items.query.filter_by(id=id).first()
     change = Qty_changelog.query.filter_by(item_id=id).order_by(Qty_changelog.change_time).all()
     null_list = []
-    return render_template('info.html', item=item, change=change, null=null_list, path=Config.PICPATH)
+    if item.img_name is None:
+        return render_template('info.html', item=item, change=change, null=null_list)
+    else:
+        return render_template('info.html', item=item, change=change, null=null_list, path=Config.PICPATH)
 
 
 def save_pic(img):

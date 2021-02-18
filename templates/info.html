@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1 class="title">{{ item.title }}</h1>
-{% if item.img_name != '' %}
+{% if item.img_name != None %}
 <img src="{{ path + item.img_name }}" style="max-width: 300px" alt="{{ item.title }}">
 {% endif %}
 

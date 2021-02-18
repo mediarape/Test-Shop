@@ -2,8 +2,10 @@
 
 {% block content %}
 <h3 class="title">Edit {{ item.title }}</h3>
-{% if item.img_name != '' %}
+{% if item.img_name != None %}
 <img src="{{ path + item.img_name }}" style="max-width: 300px" alt="{{ item.title }}">
+{% else %}
+
 {% endif %}
 <div class="box">
     <form method="POST" action="{{ url_for('catalog.item_edit', id=item.id) }}" enctype="multipart/form-data">
